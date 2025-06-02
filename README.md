@@ -415,3 +415,66 @@ Note that `pnpm test` and `pnpm playground` both work correctly.
 For example `pnpm test` will dump to `.vite-node/dump` and a file containing `_src_MyButton_tsx` demonstrates correct output.
 Running `pnpm playground` also demonstrates the correct output when inspecting `MyButton` and seeing its `Memo✨` label:
 <img width="739" alt="Image" src="https://github.com/user-attachments/assets/22142972-f145-43f7-a27d-e294289f9559" />
+
+# Workaround
+
+Check the [`workaround` branch](https://github.com/stipsan/tsdown-react-compiler-repro/tree/workaround) for a fix.
+It produces the correct output:
+
+```js
+import { c } from 'react-compiler-runtime'
+import { jsxs } from 'react/jsx-runtime'
+
+//#region src/MyButton.tsx
+function MyButton(t0) {
+  const $ = c(2)
+  const { type } = t0
+  let t1
+  if ($[0] !== type) {
+    t1 = /* @__PURE__ */ jsxs('button', {
+      className: 'my-button',
+      children: ['my button: type ', type],
+    })
+    $[0] = type
+    $[1] = t1
+  } else t1 = $[1]
+  return t1
+}
+
+//#endregion
+export { MyButton }
+//# sourceMappingURL=index.js.map
+```
+
+By patching the `@vitejs/plugin-react` package:
+
+```diff
+diff --git a/dist/index.cjs b/dist/index.cjs
+index c3d068fad7c354bedcf3364041b85fe820b11fff..f9365fb338b9bb4de1dad6dd596b48f83e1013ac 100644
+--- a/dist/index.cjs
++++ b/dist/index.cjs
+@@ -143,7 +143,7 @@ function viteReact(opts = {}) {
+   const jsxImportDevRuntime = `${jsxImportSource}/jsx-dev-runtime`;
+   let isProduction = true;
+   let projectRoot = process.cwd();
+-  let skipFastRefresh = false;
++  let skipFastRefresh = isProduction;
+   let runPluginOverrides;
+   let staticBabelOptions;
+   const importReactRE = /\bimport\s+(?:\*\s+as\s+)?React\b/;
+diff --git a/dist/index.mjs b/dist/index.mjs
+index 5d03436ef54221d059024d8c4d7d2ff25b802ef9..9227cbd94eeceda8075221a43ce3b3adb52571d8 100644
+--- a/dist/index.mjs
++++ b/dist/index.mjs
+@@ -127,7 +127,7 @@ function viteReact(opts = {}) {
+   const jsxImportDevRuntime = `${jsxImportSource}/jsx-dev-runtime`;
+   let isProduction = true;
+   let projectRoot = process.cwd();
+-  let skipFastRefresh = false;
++  let skipFastRefresh = isProduction;
+   let runPluginOverrides;
+   let staticBabelOptions;
+   const importReactRE = /\bimport\s+(?:\*\s+as\s+)?React\b/;
+```
+
+The issue seems to be that the `rolldown` pipeline [doesn't call the `configResolved` hook, which is typically setting `skipFastRefresh` to `true` if `isProduction` is `true`](https://github.com/vitejs/vite-plugin-react/blob/88585dbd60f8ec40b31bed8994ac3a73fc0f1bac/packages/plugin-react/src/index.ts#L167-L170).
