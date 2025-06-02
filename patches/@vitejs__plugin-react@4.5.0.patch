@@ -1,0 +1,26 @@
+diff --git a/dist/index.cjs b/dist/index.cjs
+index c3d068fad7c354bedcf3364041b85fe820b11fff..f9365fb338b9bb4de1dad6dd596b48f83e1013ac 100644
+--- a/dist/index.cjs
++++ b/dist/index.cjs
+@@ -143,7 +143,7 @@ function viteReact(opts = {}) {
+   const jsxImportDevRuntime = `${jsxImportSource}/jsx-dev-runtime`;
+   let isProduction = true;
+   let projectRoot = process.cwd();
+-  let skipFastRefresh = false;
++  let skipFastRefresh = isProduction;
+   let runPluginOverrides;
+   let staticBabelOptions;
+   const importReactRE = /\bimport\s+(?:\*\s+as\s+)?React\b/;
+diff --git a/dist/index.mjs b/dist/index.mjs
+index 5d03436ef54221d059024d8c4d7d2ff25b802ef9..9227cbd94eeceda8075221a43ce3b3adb52571d8 100644
+--- a/dist/index.mjs
++++ b/dist/index.mjs
+@@ -127,7 +127,7 @@ function viteReact(opts = {}) {
+   const jsxImportDevRuntime = `${jsxImportSource}/jsx-dev-runtime`;
+   let isProduction = true;
+   let projectRoot = process.cwd();
+-  let skipFastRefresh = false;
++  let skipFastRefresh = isProduction;
+   let runPluginOverrides;
+   let staticBabelOptions;
+   const importReactRE = /\bimport\s+(?:\*\s+as\s+)?React\b/;

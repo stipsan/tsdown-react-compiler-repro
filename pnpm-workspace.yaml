@@ -1,0 +1,2 @@
+patchedDependencies:
+  '@vitejs/plugin-react@4.5.0': patches/@vitejs__plugin-react@4.5.0.patch
