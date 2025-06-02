@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      react-compiler-runtime:
+        specifier: 19.1.0-rc.2
+        version: 19.1.0-rc.2(react@19.1.0)
     devDependencies:
       '@sxzz/eslint-config':
         specifier: ^7.0.1
@@ -32,6 +36,9 @@ importers:
       '@vitejs/plugin-react':
         specifier: ^4.5.0
         version: 4.5.0(rolldown-vite@6.3.16(@types/node@22.15.29)(esbuild@0.25.5)(jiti@2.4.2)(tsx@4.19.4)(yaml@2.8.0))
+      babel-plugin-react-compiler:
+        specifier: 19.1.0-rc.2
+        version: 19.1.0-rc.2
       bumpp:
         specifier: ^10.1.0
         version: 10.1.1
@@ -1012,6 +1019,9 @@ packages:
   ast-kit@2.1.0:
     resolution: {integrity: sha512-ROM2LlXbZBZVk97crfw8PGDOBzzsJvN2uJCmwswvPUNyfH14eg90mSN3xNqsri1JS1G9cz0VzeDUhxJkTrr4Ew==}
     engines: {node: '>=20.18.0'}
+
+  babel-plugin-react-compiler@19.1.0-rc.2:
+    resolution: {integrity: sha512-kSNA//p5fMO6ypG8EkEVPIqAjwIXm5tMjfD1XRPL/sRjYSbJ6UsvORfaeolNWnZ9n310aM0xJP7peW26BuCVzA==}
 
   balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
@@ -2058,6 +2068,11 @@ packages:
 
   rc9@2.1.2:
     resolution: {integrity: sha512-btXCnMmRIBINM2LDZoEmOogIZU7Qe7zn4BpomSKZ/ykbLObuBdvG+mFq11DL6fjH1DRwHhrlgtYWG96bJiC7Cg==}
+
+  react-compiler-runtime@19.1.0-rc.2:
+    resolution: {integrity: sha512-852AwyIsbWJ5o1LkQVAZsVK3iLjMxOfKZuxqeGd/RfD+j1GqHb6j3DSHLtpu4HhFbQHsP2DzxjJyKR6luv4D8w==}
+    peerDependencies:
+      react: ^17.0.0 || ^18.0.0 || ^19.0.0 || ^0.0.0-experimental
 
   react-dom@19.1.0:
     resolution: {integrity: sha512-Xs1hdnE+DyKgeHJeJznQmYMIBG3TKIHJJT95Q58nHLSrElKlGQqDTR2HQ9fx5CN/Gk6Vh/kupBTDLU11/nDk/g==}
@@ -3376,6 +3391,10 @@ snapshots:
       '@babel/parser': 7.27.4
       pathe: 2.0.3
 
+  babel-plugin-react-compiler@19.1.0-rc.2:
+    dependencies:
+      '@babel/types': 7.27.3
+
   balanced-match@1.0.2: {}
 
   birpc@2.3.0: {}
@@ -4598,6 +4617,10 @@ snapshots:
     dependencies:
       defu: 6.1.4
       destr: 2.0.5
+
+  react-compiler-runtime@19.1.0-rc.2(react@19.1.0):
+    dependencies:
+      react: 19.1.0
 
   react-dom@19.1.0(react@19.1.0):
     dependencies:

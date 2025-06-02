@@ -3,5 +3,9 @@ import { defineConfig } from 'vite'
 
 export default defineConfig({
   root: './playground',
-  plugins: [react()],
+  plugins: [
+    react({
+      babel: { plugins: [['babel-plugin-react-compiler', { target: '18' }]] },
+    }),
+  ],
 })
