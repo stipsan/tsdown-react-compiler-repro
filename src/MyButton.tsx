@@ -1,9 +1,7 @@
-import React from 'react'
-
 interface MyButtonProps {
   type?: 'primary'
 }
 
-export const MyButton: React.FC<MyButtonProps> = ({ type }) => {
+export function MyButton({ type }: MyButtonProps) {
   return <button className="my-button">my button: type {type}</button>
 }
